@@ -1,7 +1,7 @@
 <?php
 
-use ZedanLab\UsernameGenerator\Tests\App\Models\User;
 use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
+use ZedanLab\UsernameGenerator\Tests\App\Models\User;
 use ZedanLab\UsernameGenerator\Tests\App\Models\UserWithoutUsername;
 
 it('throws an exception if you give it a form that does not implement shouldGeneratesUsername', function () {
@@ -45,7 +45,7 @@ it('returns the value of the given option key', function () {
 it('generates a username on creating', function () {
     $user = User::factory()->create();
 
-    expect(!is_null($user->username))->toBeTrue();
+    expect(! is_null($user->username))->toBeTrue();
 });
 
 it('generates a username on updating if it is enabled', function () {

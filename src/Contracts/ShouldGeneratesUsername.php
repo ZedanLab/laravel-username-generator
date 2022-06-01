@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ShouldGeneratesUsername
 {
-
     /**
      * Boot Eloquent HasUsername trait for the model.
      *

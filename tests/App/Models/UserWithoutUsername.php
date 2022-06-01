@@ -2,8 +2,8 @@
 
 namespace ZedanLab\UsernameGenerator\Tests\App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use ZedanLab\UsernameGenerator\Tests\Database\Factories\UserWithoutUsernameFactory;
 
 class UserWithoutUsername extends Model

@@ -2,9 +2,9 @@
 
 namespace ZedanLab\UsernameGenerator\Tests\App\Models;
 
-use ZedanLab\UsernameGenerator\Traits\HasUsername;
 use ZedanLab\UsernameGenerator\Contracts\ShouldGeneratesUsername;
 use ZedanLab\UsernameGenerator\Tests\Database\Factories\UserFactory;
+use ZedanLab\UsernameGenerator\Traits\HasUsername;
 
 class User extends UserWithoutUsername implements ShouldGeneratesUsername
 {
@@ -17,7 +17,7 @@ class User extends UserWithoutUsername implements ShouldGeneratesUsername
      */
     protected static function newFactory()
     {
-        return UserFactory::new ();
+        return UserFactory::new();
     }
 
     /**
@@ -29,7 +29,7 @@ class User extends UserWithoutUsername implements ShouldGeneratesUsername
     {
         return [
             'source' => 'email',
-            'field'  => 'username',
+            'field' => 'username',
         ];
     }
 }
