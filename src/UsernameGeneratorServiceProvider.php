@@ -4,7 +4,6 @@ namespace ZedanLab\UsernameGenerator;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ZedanLab\UsernameGenerator\Commands\UsernameGeneratorCommand;
 
 class UsernameGeneratorServiceProvider extends PackageServiceProvider
 {
@@ -17,9 +16,6 @@ class UsernameGeneratorServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-username-generator')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-username-generator_table')
-            ->hasCommand(UsernameGeneratorCommand::class);
+            ->hasConfigFile();
     }
 }
