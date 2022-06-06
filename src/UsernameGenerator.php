@@ -3,8 +3,8 @@
 namespace ZedanLab\UsernameGenerator;
 
 use Closure;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 
 class UsernameGenerator
@@ -15,7 +15,7 @@ class UsernameGenerator
     protected $options;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var \Illuminate\Database\Eloquent\Model|\ZedanLab\UsernameGenerator\Contracts\ShouldGeneratesUsername
      */
     protected $model;
 
@@ -35,7 +35,7 @@ class UsernameGenerator
     {
         $this->setOptions($model);
 
-        if (! $this->options->getAttribute($event)) {
+        if (!$this->options->getAttribute($event)) {
             return;
         }
 
@@ -65,8 +65,8 @@ class UsernameGenerator
     }
 
     /**
-     * @param  string  $type
-     * @return mixed
+     * @param  string   $type
+     * @return string
      */
     protected function getWord(string $type = 'noun'): string
     {
@@ -119,8 +119,7 @@ class UsernameGenerator
     /**
      * Remove unwanted characters.
      *
-     * @param  string   $text
-     * @return string
+     * @return self
      */
     protected function stripUnwantedCharacters(): self
     {
@@ -131,7 +130,6 @@ class UsernameGenerator
 
     /**
      * Trim spaces down.
-     *
      *
      * @return self
      */
@@ -162,7 +160,10 @@ class UsernameGenerator
      */
     protected function makeUnique(): self
     {
-        while (! $this->checkIfUnique()) {
+        while (!$this->checkIfUnique()) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $this->username .= ($this->model::whereUsernameLike($this->username)->count() + 1) . Str::random(3);
         }
 
@@ -176,7 +177,7 @@ class UsernameGenerator
      */
     protected function checkIfUnique(): bool
     {
-        if ($checkIfUnique = $this->options->getAttribute('unique') && $this->model) {
+        if (!is_null($checkIfUnique = $this->options->getAttribute('unique'))) {
             if ($checkIfUnique instanceof Closure) {
                 $isUnique = $checkIfUnique($this->username);
             }
@@ -186,7 +187,7 @@ class UsernameGenerator
                 $isUnique = $this->model::isUsernameUnique($this->username, $this->model);
             }
 
-            if (! ($isUnique ?? true)) {
+            if (!($isUnique ?? true)) {
                 return false;
             }
         }
@@ -195,17 +196,9 @@ class UsernameGenerator
     }
 
     /**
-     * Get the original unconverted text.
+     * Convert text to ascii code.
      *
-     * @return string
-     */
-    protected function getOriginal(): string
-    {
-        return $this->original;
-    }
-
-    /**
-     * @return mixed
+     * @return self
      */
     protected function toAscii(): self
     {

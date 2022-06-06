@@ -45,7 +45,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        $migration = include __DIR__ . '/database/migrations/2022_05_30_000000_create_users_table.php';
+        $migration = include __DIR__ . '/Database/Migrations/2022_05_30_000000_create_users_table.php';
         $migration->up();
     }
 }

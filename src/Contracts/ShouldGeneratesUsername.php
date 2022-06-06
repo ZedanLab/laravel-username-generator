@@ -14,6 +14,20 @@ interface ShouldGeneratesUsername
     public static function bootHasUsername();
 
     /**
+     * Setup the Username Generator default options.
+     *
+     * @return array
+     */
+    public static function defaultUsernameGeneratorOptions(): array;
+
+    /**
+     * Set the Username Generator default options.
+     *
+     * @return void
+     */
+    public static function setDefaultUsernameGeneratorOptions(): void;
+
+    /**
      * Set the Username Generator options.
      *
      * @param  array   $options
@@ -21,13 +35,6 @@ interface ShouldGeneratesUsername
      * @return array
      */
     public static function setUsernameGeneratorOptions(array $options, bool $isDefault = false): array;
-
-    /**
-     * Setup the Username Generator default options.
-     *
-     * @return array
-     */
-    public static function defaultUsernameGeneratorOptions(): array;
 
     /**
      * Get the Username Generator options.
@@ -61,6 +68,32 @@ interface ShouldGeneratesUsername
      * @return \Illuminate\Database\Eloquent\Model
      */
     public static function findByUsernameOrFail(string $username, array $columns = ['*']): Model;
+
+    /**
+     * Scope a query to only include like the given coordinates.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder   $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWhereUsername($query, string $username);
+
+    /**
+     * Scope a query to only include like the given coordinates.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder   $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWhereUsernameLike($query, string $username);
+
+    /**
+     * Find a model by its primary key or throw an exception.
+     *
+     * @param  string                                                 $username
+     * @param  \Illuminate\Database\Eloquent\Model|string|int         $modelId
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @return bool
+     */
+    public static function isUsernameUnique(string $username, Model | string | int $modelId = null): bool;
 
     /**
      * Retrieve the model for a bound value.

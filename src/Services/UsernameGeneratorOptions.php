@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use ZedanLab\UsernameGenerator\Contracts\ShouldGeneratesUsername;
 
-class UsernameGeneratorOptions
+final class UsernameGeneratorOptions
 {
     /**
      * @var array
@@ -32,7 +32,7 @@ class UsernameGeneratorOptions
     protected $options;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var \ZedanLab\UsernameGenerator\Contracts\ShouldGeneratesUsername
      */
     protected $model;
 
