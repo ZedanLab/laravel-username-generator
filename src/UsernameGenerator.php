@@ -3,8 +3,8 @@
 namespace ZedanLab\UsernameGenerator;
 
 use Closure;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 
 class UsernameGenerator
@@ -35,7 +35,7 @@ class UsernameGenerator
     {
         $this->setOptions($model);
 
-        if (!$this->options->getAttribute($event)) {
+        if (! $this->options->getAttribute($event)) {
             return;
         }
 
@@ -110,7 +110,8 @@ class UsernameGenerator
     {
         try {
             $this->username = Str::lower($this->username);
-        } catch (\BadMethodCallException$e) {}
+        } catch (\BadMethodCallException$e) {
+        }
 
         return $this;
     }

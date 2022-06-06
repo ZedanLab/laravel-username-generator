@@ -3,9 +3,9 @@
 namespace ZedanLab\UsernameGenerator\Services;
 
 use Closure;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
-use Illuminate\Database\Eloquent\Model;
 use ZedanLab\UsernameGenerator\Contracts\ShouldGeneratesUsername;
 
 class UsernameGeneratorOptions
@@ -14,15 +14,15 @@ class UsernameGeneratorOptions
      * @var array
      */
     protected $optionsDataType = [
-        'source'           => ['string', 'array', Closure::class],
-        'field'            => ['string'],
-        'route_binding'    => ['boolean'],
-        'on_creating'      => ['boolean'],
-        'on_updating'      => ['boolean'],
-        'unique'           => ['boolean', Closure::class],
-        'separator'        => ['string'],
-        'lowercase'        => ['boolean'],
-        'regex'            => ['null', 'string'],
+        'source' => ['string', 'array', Closure::class],
+        'field' => ['string'],
+        'route_binding' => ['boolean'],
+        'on_creating' => ['boolean'],
+        'on_updating' => ['boolean'],
+        'unique' => ['boolean', Closure::class],
+        'separator' => ['string'],
+        'lowercase' => ['boolean'],
+        'regex' => ['null', 'string'],
         'convert_to_ascii' => ['boolean'],
     ];
 
@@ -142,7 +142,7 @@ class UsernameGeneratorOptions
             return $this;
         }
 
-        if (!is_string($keys)) {
+        if (! is_string($keys)) {
             throw new InvalidArgumentException('$key must be a string or array.');
         }
 

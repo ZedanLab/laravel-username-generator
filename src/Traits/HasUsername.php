@@ -3,8 +3,8 @@
 namespace ZedanLab\UsernameGenerator\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 use ZedanLab\UsernameGenerator\Observers\UsernameGeneratorObserver;
+use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 
 trait HasUsername
 {
@@ -150,13 +150,13 @@ trait HasUsername
      * @param  string                                                 $username
      * @param  array                                                  $model
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @return boolean
+     * @return bool
      */
     public static function isUsernameUnique(string $username, $modelId = null): bool
     {
         $query = static::whereUsername($username);
 
-        if (!blank($modelId)) {
+        if (! blank($modelId)) {
             $model = new static();
 
             if ($modelId instanceof Model) {

@@ -1,7 +1,7 @@
 <?php
 
-use ZedanLab\UsernameGenerator\Tests\App\Models\User;
 use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
+use ZedanLab\UsernameGenerator\Tests\App\Models\User;
 use ZedanLab\UsernameGenerator\Tests\App\Models\UserWithoutUsername;
 
 it('throws an exception if you give it a form that does not implement shouldGeneratesUsername', function () {
