@@ -22,21 +22,49 @@ trait HasUsername
      */
     public static function bootHasUsername()
     {
-        static::setUsernameGeneratorOptions(static::defaultUsernameGeneratorOptions());
+        // static::setDefaultUsernameGeneratorOptions();
 
         static::observe(app(UsernameGeneratorObserver::class));
+    }
+
+    /**
+     * Setup the Username Generator default options.
+     *
+     * @return array
+     */
+    public static function defaultUsernameGeneratorOptions(): array
+    {
+        return [];
+    }
+
+    /**
+     * Set the Username Generator default options.
+     *
+     * @return void
+     */
+    public static function setDefaultUsernameGeneratorOptions(): void
+    {
+        if (!blank(static::$usernameGeneratorOptions)) {
+            return;
+        }
+
+        static::setUsernameGeneratorOptions(static::defaultUsernameGeneratorOptions(), true);
     }
 
     /**
      * Set the Username Generator options.
      *
      * @param  array   $options
+     * @param  boolean $isDefault
      * @return array
      */
-    public static function setUsernameGeneratorOptions(array $options): array
+    public static function setUsernameGeneratorOptions(array $options, bool $isDefault = false): array
     {
-        dump($options);
-        static::$usernameGeneratorOptions = array_merge($options, static::$usernameGeneratorOptions);
+        if (!$isDefault) {
+            static::setDefaultUsernameGeneratorOptions();
+        }
+
+        static::$usernameGeneratorOptions = array_merge(static::$usernameGeneratorOptions, $options);
 
         return static::$usernameGeneratorOptions;
     }

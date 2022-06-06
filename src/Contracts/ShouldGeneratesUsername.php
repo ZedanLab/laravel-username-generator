@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ShouldGeneratesUsername
 {
-
     /**
      * Boot Eloquent HasUsername trait for the model.
      *
@@ -18,9 +17,17 @@ interface ShouldGeneratesUsername
      * Set the Username Generator options.
      *
      * @param  array   $options
+     * @param  boolean $isDefault
      * @return array
      */
-    public static function setUsernameGeneratorOptions(array $options): array;
+    public static function setUsernameGeneratorOptions(array $options, bool $isDefault = false): array;
+
+    /**
+     * Setup the Username Generator default options.
+     *
+     * @return array
+     */
+    public static function defaultUsernameGeneratorOptions(): array;
 
     /**
      * Get the Username Generator options.

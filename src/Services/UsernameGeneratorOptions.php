@@ -39,14 +39,19 @@ class UsernameGeneratorOptions
     /**
      * Create a new service instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Model|null $model
+     * @param  \Illuminate\Database\Eloquent\Model|string|null $model
      * @return void
      */
-    public function __construct(Model $model = null)
+    public function __construct(Model | string $model = null)
     {
         $this->options = config('username-generator');
+
         if (is_null($model)) {
             return;
+        }
+
+        if (is_string($model)) {
+            $model = new $model();
         }
 
         throw_unless($model instanceof ShouldGeneratesUsername, new InvalidArgumentException("Model argument must implements ZedanLab\UsernameGenerator\Contracts\ShouldGeneratesUsername interface."));
@@ -159,8 +164,8 @@ class UsernameGeneratorOptions
     /**
      * Get any option value by key.
      *
-     * @param  string                                   $key
-     * @param  \Illuminate\Database\Eloquent\Model|null $model
+     * @param  string                                          $key
+     * @param  \Illuminate\Database\Eloquent\Model|string|null $model
      * @return mixed|array
      */
     public static function get($key = 'all', $model = null)

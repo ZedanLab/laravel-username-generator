@@ -161,6 +161,20 @@ class UsernameGenerator
      */
     protected function makeUnique(): self
     {
+        while (!$this->checkIfUnique()) {
+            $this->username .= ($this->model::whereUsernameLike($this->username)->count() + 1) . Str::random(3);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check if the username is unique.
+     *
+     * @return boolean
+     */
+    protected function checkIfUnique(): bool
+    {
         if ($checkIfUnique = $this->options->getAttribute('unique') && $this->model) {
             if ($checkIfUnique instanceof Closure) {
                 $isUnique = $checkIfUnique($this->username);
@@ -171,16 +185,12 @@ class UsernameGenerator
                 $isUnique = $this->model::isUsernameUnique($this->username, $this->model);
             }
 
-            if ($isUnique ?? true) {
-                return $this;
+            if (!($isUnique ?? true)) {
+                return false;
             }
-
-            do {
-                $this->username .= ($this->model::whereUsernameLike($this->username)->count() + 1) . Str::random(3);
-            } while (!$isUnique);
         }
 
-        return $this;
+        return true;
     }
 
     /**
