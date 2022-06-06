@@ -3,8 +3,8 @@
 namespace ZedanLab\UsernameGenerator;
 
 use Closure;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 
 class UsernameGenerator
@@ -35,7 +35,7 @@ class UsernameGenerator
     {
         $this->setOptions($model);
 
-        if (!$this->options->getAttribute($event)) {
+        if (! $this->options->getAttribute($event)) {
             return;
         }
 
@@ -160,7 +160,7 @@ class UsernameGenerator
      */
     protected function makeUnique(): self
     {
-        while (!$this->checkIfUnique()) {
+        while (! $this->checkIfUnique()) {
             /**
              * @phpstan-ignore-next-line
              */
@@ -177,7 +177,7 @@ class UsernameGenerator
      */
     protected function checkIfUnique(): bool
     {
-        if (!is_null($checkIfUnique = $this->options->getAttribute('unique'))) {
+        if (! is_null($checkIfUnique = $this->options->getAttribute('unique'))) {
             if ($checkIfUnique instanceof Closure) {
                 $isUnique = $checkIfUnique($this->username);
             }
@@ -187,7 +187,7 @@ class UsernameGenerator
                 $isUnique = $this->model::isUsernameUnique($this->username, $this->model);
             }
 
-            if (!($isUnique ?? true)) {
+            if (! ($isUnique ?? true)) {
                 return false;
             }
         }

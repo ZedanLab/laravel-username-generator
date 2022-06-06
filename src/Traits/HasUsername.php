@@ -3,8 +3,8 @@
 namespace ZedanLab\UsernameGenerator\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 use ZedanLab\UsernameGenerator\Observers\UsernameGeneratorObserver;
+use ZedanLab\UsernameGenerator\Services\UsernameGeneratorOptions;
 
 trait HasUsername
 {
@@ -44,7 +44,7 @@ trait HasUsername
      */
     public static function setDefaultUsernameGeneratorOptions(): void
     {
-        if (!blank(static::$usernameGeneratorOptions)) {
+        if (! blank(static::$usernameGeneratorOptions)) {
             return;
         }
 
@@ -60,7 +60,7 @@ trait HasUsername
      */
     public static function setUsernameGeneratorOptions(array $options, bool $isDefault = false): array
     {
-        if (!$isDefault) {
+        if (! $isDefault) {
             static::setDefaultUsernameGeneratorOptions();
         }
 
@@ -156,7 +156,7 @@ trait HasUsername
     {
         $query = static::whereUsername($username);
 
-        if (!blank($modelId)) {
+        if (! blank($modelId)) {
             $model = new static();
 
             if ($modelId instanceof Model) {
