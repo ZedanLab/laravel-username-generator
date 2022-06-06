@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
 use ZedanLab\UsernameGenerator\Tests\App\Models\User;
 
 it('generates a username on updating if it is enabled', function () {

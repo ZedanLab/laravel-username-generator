@@ -44,7 +44,7 @@ trait HasUsername
      */
     public static function setDefaultUsernameGeneratorOptions(): void
     {
-        if (!blank(static::$usernameGeneratorOptions)) {
+        if (! blank(static::$usernameGeneratorOptions)) {
             return;
         }
 
@@ -55,12 +55,12 @@ trait HasUsername
      * Set the Username Generator options.
      *
      * @param  array   $options
-     * @param  boolean $isDefault
+     * @param  bool $isDefault
      * @return array
      */
     public static function setUsernameGeneratorOptions(array $options, bool $isDefault = false): array
     {
-        if (!$isDefault) {
+        if (! $isDefault) {
             static::setDefaultUsernameGeneratorOptions();
         }
 

@@ -7,7 +7,7 @@ it('generates a username on creating if it is enabled', function () {
     User::setUsernameGeneratorOptions(['on_creating' => true]);
 
     $user = User::factory()->create();
-    expect(!is_null($user->username))->toBeTrue();
+    expect(! is_null($user->username))->toBeTrue();
 });
 
 it('generates a unique username on creating', function () {

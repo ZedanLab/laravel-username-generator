@@ -17,7 +17,7 @@ interface ShouldGeneratesUsername
      * Set the Username Generator options.
      *
      * @param  array   $options
-     * @param  boolean $isDefault
+     * @param  bool $isDefault
      * @return array
      */
     public static function setUsernameGeneratorOptions(array $options, bool $isDefault = false): array;
